@@ -1,4 +1,6 @@
-__pycache__
+__pycache__/
 .venv/
 .env
 training/
+.DS_Store
+fast-venv
