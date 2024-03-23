@@ -1,0 +1,6 @@
+fastapi==0.68.0
+SQLAlchemy==1.4.23
+uvicorn==0.13.4
+passlib[bcrypt]
+python-multipart
+python-jose[cryptography]
