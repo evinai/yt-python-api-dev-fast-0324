@@ -1,0 +1,17 @@
+[Unit]
+Description=gunicorn instance to server api
+After=network.target
+
+
+[Service]
+User=evinai
+Group=evinai
+WorkingDirectory=/home/evinai/app/src/
+Environment="PATH=/home/evinai/app/venv/bin"
+EnvironmentFile=/home/evinai/.env
+ExecStart=/home/evinai/app/venv/bin/gunicorn -w 4 -k uvicorn.workers.UvicornWorker app.main:app --bind 0.0.0.0:8000
+
+
+[Install]
+WantedBy=multi-user.target
+
