@@ -7,7 +7,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: pulling get repo
-              uses: actions/checkout@2
+              uses: actions/checkout@v4
             - name: sayhi to togay
               run: echo "hello Togay"
 
