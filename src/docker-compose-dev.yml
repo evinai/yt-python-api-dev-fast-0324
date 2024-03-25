@@ -1,0 +1,35 @@
+version: "3"
+services:
+  api:
+    build: .
+    depends_on:
+        - postgres
+    ports:
+        - 8000:8000
+    volumes: # bind mount syncs two folders in container. 
+    # :ro says it cant shange files we can
+        - ./:/usr/src/app:ro
+        # This command reloads file wh3n there is change
+        # This helps us to change container data from our local host file
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    # env_file:
+    #     - ./.env
+    environment:
+        - DATABASE_HOSTNAME=postgres
+        - DATABASE_PORT=5432
+        - DATABASE_PASSWORD=12345
+        - DATABASE_NAME=postgres
+        - DATABASE_USERNAME=postgres
+        - SECRET_KEY=djkhgk3h45hjkdgjskjtknkdngkdjkjfjskfjkslkfjljklfdjg
+        - ALGORITHM=HS256
+        - ACCESS_TOKEN_EXPIRE_MINUTES=30
+  postgres:
+      image: postgres
+      environment:
+          - POSTGRES_PASSWORD=12345
+          - POSTGRES_DB=postgres
+      volumes:
+          - postgres-db:/var/lib/postgresql/data
+
+volumes:
+    postgres-db:        
